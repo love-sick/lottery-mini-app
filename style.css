@@ -1,99 +1,123 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-svg.filter {
-  display: none;
-}
-body {
-  width: 100%;
-  height: 100vh;
-  background-color: #1e1737;
+@import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
+body, html {
+  font-family: 'Quicksand', sans-serif;
+  background: #5fef8d;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-}
-.wrapper {
-  overflow: hidden;
-  width: 300px;
-  height: 70vh;
-  min-height: 250px;
-  max-height: 600px;
-  background-color: rgba(255,255,255,0.1);
-  position: relative;
-}
-.wrapper .box-fix {
-  position: absolute;
+  align-items: center;
+  height: 100%;
   width: 100%;
-  height: 52px;
-  bottom: 0;
-  left: 0;
-  background-color: #fd6465;
 }
-.wrapper .wrapper-inner {
-  filter: url("#goo");
+
+.radius {
+  border-radius: 5px;
+}
+.radius .tab:active::before {
+  border-radius: 5px !important;
+}
+
+.border .tab {
+  border: 1px solid #5fef8d;
+  border-right: none;
+}
+.border .tab:last-child {
+  border-right: 1px solid #5fef8d;
+  border-top-right-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+.border .tab:first-child {
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+.border .tab:active::before {
+  border-radius: inherit !important;
+}
+
+.tab-bar {
+  background-color: white;
+  padding: 5px;
+  box-shadow: 1px 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  margin: 10px;
+  color: black;
+}
+.tab-bar .tab {
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
+  width: 70px;
+  height: 70px;
+  background: inherit;
+  padding: 5px;
+  display: inherit;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
+  transition: all 0.3s;
+}
+.tab-bar .tab::before {
+  position: absolute;
+  content: "";
+  width: 26%;
+  height: 13%;
+  border-top-left-radius: 200px;
+  border-top-right-radius: 200px;
+  border-bottom: none;
+  background-color: #607D8B;
+  bottom: -8px;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+.tab-bar .tab:active::before {
   width: 100%;
   height: 100%;
+  background-color: #5fef8d;
+  border-radius: 0;
 }
-.wrapper .box {
+.tab-bar .tab:hover::before {
+  opacity: 1;
+  bottom: 0px;
+}
+.tab-bar .tab::after {
+  content: attr(data-text);
   position: absolute;
-  bottom: 0;
-  left: 0;
+  top: 0;
   width: 100%;
-  height: 43px;
-  background-color: #fd6465;
+  text-align: center;
+  color: inherit;
+  font-size: 12px;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
 }
-.wrapper .buble {
-  position: absolute;
-  width: 60px;
-  height: 50px;
-  background: #fd6465;
-  bottom: 20px;
-  left: 8px;
-  border-radius: 50%;
-  transition: 0.2s cubic-bezier(0.44, -0.35, 0.48, 1.5) all;
+.tab-bar .tab:hover {
+  padding-top: 15px;
 }
-.inspired {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  color: #4b455f;
+.tab-bar .tab:hover::after {
+  opacity: 1;
+  top: 6px;
 }
-.inspired a {
-  color: #615c73;
+.tab-bar .tab.selected {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: inherit;
+  padding-top: 15px;
 }
-.box-fix {
-  display: flex;
+.tab-bar .tab.selected::after {
+  opacity: 1;
+  top: 6px;
 }
-.box-fix li {
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  list-style: none;
-  cursor: pointer;
-  flex-grow: 1;
-  height: 100%;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.tab-bar .tab.selected::before {
+  opacity: 1;
+  bottom: 0px;
 }
-.box-fix li.active {
-  cursor: initial;
+.tab-bar .tab .icon {
+  color: inherit;
+  z-index: 10;
+  font-size: 24px;
+  display: inherit;
 }
-.box-fix li.active svg {
-  transform: translateY(-10px) scale(1.1);
-  fill: #fff;
-  transition-delay: 0.1s;
-}
-.box-fix li svg {
-  width: 25px;
-  height: 25px;
-  fill: rgba(255,255,255,0.3);
-  transition: 0.2s 0s cubic-bezier(0.53, -0.07, 0.21, 1.98) transform;
+.tab-bar .tab .icon img {
+  margin: auto;
+  height: 24px;
 }
